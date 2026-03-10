@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מצפן קריירה | שוק ההון הישראלי</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Noto+Serif+Hebrew:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LANDING -->
+<section id="landing" class="page active">
+  <div class="hero-bg">
+    <div class="grid-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon">◈</span> מצפן קריירה</div>
+    <div class="nav-tag">שוק ההון הישראלי</div>
+  </nav>
+  <div class="hero-content">
+    <div class="badge-pill">🎯 ניתוח קריירה חכם · 3 דקות</div>
+    <h1 class="hero-title">מה הצעד הנכון<br><span class="gradient-text">בקריירה שלך?</span></h1>
+    <p class="hero-subtitle">ספר לנו איפה אתה עומד היום. המערכת תמצא בשבילך את התפקיד, השכר והחברה שמתאימים לך בדיוק.</p>
+    <button class="cta-btn" onclick="startAssessment()">
+      <span>התחל הערכה</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <p class="hero-note">⏱ 3-4 דקות · ללא הרשמה · תוצאות מיידיות</p>
+  </div>
+  <div class="features-row">
+    <div class="feature-chip">💰 שכר מדויק</div>
+    <div class="feature-chip">🏢 חברות ישראליות</div>
+    <div class="feature-chip">🎯 תפקיד מותאם</div>
+    <div class="feature-chip">⚖️ איזון חיים</div>
+  </div>
+</section>
+
+<!-- QUESTIONNAIRE -->
+<section id="questionnaire" class="page">
+  <div class="q-bg"></div>
+  <div class="q-container">
+    <div class="q-header">
+      <button class="back-btn" onclick="goBack()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        חזור
+      </button>
+      <div class="progress-info"><span id="step-label">שלב 1 מתוך 3</span></div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="progress-fill"></div></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="q-step active" id="step-1">
+      <div class="step-icon">👤</div>
+      <h2 class="step-title">קצת עליך</h2>
+      <p class="step-subtitle">ארבעה פרטים בסיסיים שיעזרו לנו לדייק</p>
+      <div class="questions-grid">
+
+        <div class="q-group">
+          <label>גיל</label>
+          <div class="number-input-wrap">
+            <input type="number" id="input-age" class="free-input" placeholder="לדוגמה: 36" min="18" max="70">
+            <span class="input-suffix">שנים</span>
+          </div>
+        </div>
+
+        <div class="q-group">
+          <label>תפקיד נוכחי בשוק ההון</label>
+          <div class="searchable-wrap">
+            <input type="text" id="role-search" class="free-input search-input" placeholder="הקלד תפקיד..." autocomplete="off">
+            <div id="role-dropdown" class="role-dropdown hidden"></div>
+          </div>
+          <div class="selected-role-display" id="selected-role-display"></div>
+        </div>
+
+        <div class="q-group">
+          <label>שכר ברוטו נוכחי (גלובלי)</label>
+          <div class="number-input-wrap">
+            <input type="number" id="input-salary" class="free-input" placeholder="לדוגמה: 22000" min="0">
+            <span class="input-suffix">₪/חודש</span>
+          </div>
+        </div>
+
+        <div class="q-group">
+          <label>שנות ניסיון בפיננסים</label>
+          <div class="number-input-wrap">
+            <input type="number" id="input-exp" class="free-input" placeholder="לדוגמה: 9" min="0" max="40">
+            <span class="input-suffix">שנים</span>
+          </div>
+        </div>
+
+      </div>
+      <button class="next-btn" onclick="nextStep(1)">המשך <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="q-step" id="step-2">
+      <div class="step-icon">🎯</div>
+      <h2 class="step-title">מה חשוב לך?</h2>
+      <p class="step-subtitle">לחץ על הכוכבים לפי חשיבות. זה מה שיקבע את ההמלצה.</p>
+
+      <div class="priorities-compact">
+        <div class="priority-row">
+          <div class="pr-label"><span>💰</span> שכר גבוה</div>
+          <div class="pr-stars" data-field="p_salary">
+            <button class="star" data-val="1">★</button><button class="star" data-val="2">★</button><button class="star" data-val="3">★</button><button class="star" data-val="4">★</button><button class="star" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="priority-row">
+          <div class="pr-label"><span>⚖️</span> איזון עבודה-חיים</div>
+          <div class="pr-stars" data-field="p_balance">
+            <button class="star" data-val="1">★</button><button class="star" data-val="2">★</button><button class="star" data-val="3">★</button><button class="star" data-val="4">★</button><button class="star" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="priority-row">
+          <div class="pr-label"><span>📈</span> צמיחה מקצועית מהירה</div>
+          <div class="pr-stars" data-field="p_growth">
+            <button class="star" data-val="1">★</button><button class="star" data-val="2">★</button><button class="star" data-val="3">★</button><button class="star" data-val="4">★</button><button class="star" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="priority-row">
+          <div class="pr-label"><span>🛡️</span> יציבות ובטחון תעסוקתי</div>
+          <div class="pr-stars" data-field="p_stability">
+            <button class="star" data-val="1">★</button><button class="star" data-val="2">★</button><button class="star" data-val="3">★</button><button class="star" data-val="4">★</button><button class="star" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="priority-row">
+          <div class="pr-label"><span>🏠</span> גמישות / עבודה מהבית</div>
+          <div class="pr-stars" data-field="p_flexibility">
+            <button class="star" data-val="1">★</button><button class="star" data-val="2">★</button><button class="star" data-val="3">★</button><button class="star" data-val="4">★</button><button class="star" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="priority-row">
+          <div class="pr-label"><span>😌</span> סביבת עבודה ללא לחץ גבוה</div>
+          <div class="pr-stars" data-field="p_lowstress">
+            <button class="star" data-val="1">★</button><button class="star" data-val="2">★</button><button class="star" data-val="3">★</button><button class="star" data-val="4">★</button><button class="star" data-val="5">★</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-group" style="margin-top:28px">
+        <label>למה אתה שוקל שינוי? (בחר אחד)</label>
+        <div class="option-pills" data-field="leaveReason">
+          <button class="pill" data-value="salary">שכר נמוך מדי</button>
+          <button class="pill" data-value="growth">אין קידום</button>
+          <button class="pill" data-value="stress">לחץ גבוה מדי</button>
+          <button class="pill" data-value="boredom">שעמום מקצועי</button>
+          <button class="pill" data-value="culture">תרבות ארגונית</button>
+          <button class="pill" data-value="balance">חוסר איזון חיים</button>
+          <button class="pill" data-value="explore">סתם מסתכל סביב</button>
+        </div>
+      </div>
+
+      <button class="next-btn" onclick="nextStep(2)">המשך <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="q-step" id="step-3">
+      <div class="step-icon">🧭</div>
+      <h2 class="step-title">כיוון ואורח עבודה</h2>
+      <p class="step-subtitle">שאלה אחרונה ואנחנו מייצרים את ההמלצה</p>
+      <div class="questions-grid">
+
+        <div class="q-group">
+          <label>מה מתאים לך יותר?</label>
+          <div class="option-pills" data-field="workNature">
+            <button class="pill" data-value="analytical">ניתוח / מחקר / data</button>
+            <button class="pill" data-value="client">מול לקוחות</button>
+            <button class="pill" data-value="management">ניהול צוות</button>
+            <button class="pill" data-value="product">פרודקט / דיגיטל</button>
+            <button class="pill" data-value="mix">שילוב</button>
+          </div>
+        </div>
+
+        <div class="q-group">
+          <label>סוג ארגון מועדף</label>
+          <div class="option-pills" data-field="orgType">
+            <button class="pill" data-value="bank">בנק / מוסד פיננסי גדול</button>
+            <button class="pill" data-value="investment_house">בית השקעות</button>
+            <button class="pill" data-value="insurance">חברת ביטוח / פנסיה</button>
+            <button class="pill" data-value="fintech">פינטק / סטארטאפ</button>
+            <button class="pill" data-value="independent">עצמאי / בוטיק</button>
+            <button class="pill" data-value="no_pref">לא משנה לי</button>
+          </div>
+        </div>
+
+        <div class="q-group">
+          <label>שכר ברוטו מינימלי מקובל עליך</label>
+          <div class="number-input-wrap">
+            <input type="number" id="input-minsalary" class="free-input" placeholder="לדוגמה: 28000" min="0">
+            <span class="input-suffix">₪/חודש</span>
+          </div>
+        </div>
+
+      </div>
+      <button class="next-btn generate-btn" onclick="generateResults()">
+        <span>צור המלצות אישיות 🚀</span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- LOADING -->
+<section id="loading" class="page">
+  <div class="loading-container">
+    <div class="loader-animation">
+      <div class="loader-ring"></div>
+      <div class="loader-ring r2"></div>
+      <div class="loader-icon">◈</div>
+    </div>
+    <h2 class="loading-title">מנתח את הפרופיל שלך...</h2>
+    <div class="loading-steps">
+      <div class="load-step" id="ls1">⬜ מעבד ניסיון ותפקיד נוכחי</div>
+      <div class="load-step" id="ls2">⬜ מחפש תפקידים תואמים בשוק</div>
+      <div class="load-step" id="ls3">⬜ מתאים חברות ישראליות</div>
+      <div class="load-step" id="ls4">⬜ מכין ניתוח שכר מדויק</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results" class="page">
+  <div class="results-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+  <div class="results-container">
+    <div class="results-header">
+      <div class="results-badge">✨ דוח קריירה אישי</div>
+      <h2 class="results-title">ההמלצות שלך</h2>
+      <div class="profile-summary" id="profile-summary"></div>
+    </div>
+    <div class="insight-card" id="insight-card"></div>
+    <div class="scores-row" id="scores-row"></div>
+    <div class="results-section">
+      <h3 class="card-section-title">🎯 תפקידים מומלצים עבורך</h3>
+      <div class="cards-grid" id="roles-grid"></div>
+    </div>
+    <div class="results-section">
+      <h3 class="card-section-title">🏢 חברות ישראליות מומלצות</h3>
+      <div class="cards-grid" id="companies-grid"></div>
+    </div>
+    <div class="salary-benchmark" id="salary-benchmark"></div>
+    <div class="results-actions">
+      <button class="action-btn primary" onclick="printReport()">📄 הורד דוח</button>
+      <button class="action-btn secondary" onclick="retakeAssessment()">🔄 התחל מחדש</button>
+    </div>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
